@@ -222,8 +222,8 @@ demogpt.585dg.com {
 # }
 
 chat.585dg.com {
-    #tls /etc/letsencrypt/live/demogpt.585dg.com/fullchain.pem /etc/letsencrypt/live/demogpt.585dg.com/privkey.pem
-
+    # Caddy会自动申请和管理证书，不需要手动指定证书路径
+    
     @acme_challenge {
         path /.well-known/acme-challenge/*
     }
@@ -238,15 +238,15 @@ chat.585dg.com {
         header_up X-Forwarded-For {remote_host}
         header_up X-Forwarded-Proto {scheme}
         header_up Upgrade {header.Upgrade}
-        header_up Connection "upgrade"
+        header_up Connection {header.Connection}
+        
         transport http {
-            tls
             tls_server_name liuli-chatgpt.soruxgpt.com
             versions h1, h2
         }
-        flush_interval -1
     }
 }
+
 
 
 
