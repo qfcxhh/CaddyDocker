@@ -1,7 +1,7 @@
 version: '3'
 services:
   candy:
-    image: tangcuyu/candy:latest
+    image: caddy:latest
     container_name: candy-proxy
     ports:
       - "80:80"
