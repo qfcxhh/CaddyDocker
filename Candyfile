@@ -417,18 +417,10 @@ api.claude35.585dg.com {
     }
 }
 
-# 15. store.585dg.com
-store.585dg.com {
-    #tls /etc/letsencrypt/live/store.585dg.com/fullchain.pem /etc/letsencrypt/live/store.585dg.com/privkey.pem
+# 15. store.585dg.com 商店需要同时基于http和https
 
-    @acme_challenge {
-        path /.well-known/acme-challenge/*
-    }
-    handle @acme_challenge {
-        root * /var/www/html
-        file_server
-    }
-
+# HTTP配置
+http://api.585dg.com {
     reverse_proxy http://54.254.143.80:9000 {
         header_up Host {host}
         header_up Upgrade {header.Upgrade}
@@ -439,6 +431,40 @@ store.585dg.com {
         flush_interval -1
     }
 }
+https://api.585dg.com {
+    reverse_proxy http://54.254.143.80:9000 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+
+
+# store.585dg.com {
+#     #tls /etc/letsencrypt/live/store.585dg.com/fullchain.pem /etc/letsencrypt/live/store.585dg.com/privkey.pem
+
+#     @acme_challenge {
+#         path /.well-known/acme-challenge/*
+#     }
+#     handle @acme_challenge {
+#         root * /var/www/html
+#         file_server
+#     }
+
+#     reverse_proxy http://54.254.143.80:9000 {
+#         header_up Host {host}
+#         header_up Upgrade {header.Upgrade}
+#         header_up Connection "upgrade"
+#         transport http {
+#             versions h1
+#         }
+#         flush_interval -1
+#     }
+# }
 
 # 16. api.poe.585dg.com
 api.poe.585dg.com {
