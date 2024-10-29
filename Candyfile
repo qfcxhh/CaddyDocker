@@ -234,7 +234,7 @@ chat.585dg.com {
 
     reverse_proxy {
         to https://liuli-chatgpt.soruxgpt.com 
-        header_up Host chat.soruxgpt.com
+        header_up Host liuli-chatgpt.soruxgpt.com
         transport http {
             tls
             tls_insecure_skip_verify
