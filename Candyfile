@@ -1,0 +1,450 @@
+{
+    # Global options
+    # auto_https disable_redirects
+        # 启用自动 HTTPS
+    auto_https on
+    # 可选: 配置邮箱用于 Let's Encrypt 通知
+    email 213193509seu@gmail.com
+}
+
+# ACME challenge handling for HTTP
+:80 {
+    root * /var/www/html
+    file_server
+}
+
+# 1. claude3.ucas.life
+claude3.ucas.life {
+    #tls /etc/letsencrypt/live/claude3.ucas.life/fullchain.pem /etc/letsencrypt/live/claude3.ucas.life/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    handle {
+        reverse_proxy http://60.205.189.192:1145 {
+            header_up Connection ""
+            transport http {
+                versions h1
+                read_timeout 24h
+            }
+            flush_interval -1
+        }
+    }
+}
+
+# 2. claude.585dg.com
+claude.585dg.com {
+    #tls /etc/letsencrypt/live/claude3.ucas.life/fullchain.pem /etc/letsencrypt/live/claude3.ucas.life/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    handle {
+        reverse_proxy http://60.205.189.192:1145 {
+            header_up Connection ""
+            transport http {
+                versions h1
+                read_timeout 24h
+            }
+            flush_interval -1
+        }
+    }
+}
+
+# 3. claude.liuligpt.space
+claude.liuligpt.space {
+    #tls /etc/letsencrypt/live/claude.liuligpt.space/fullchain.pem /etc/letsencrypt/live/claude.liuligpt.space/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    handle {
+        root * /etc/nginx/dist
+        try_files {path} {path}/ /index.html
+        file_server
+    }
+}
+
+# 4. claude.liuli.mmwcy.cn
+claude.liuli.mmwcy.cn {
+    #tls /etc/letsencrypt/live/claude.liuli.mmwcy.cn/fullchain.pem /etc/letsencrypt/live/claude.liuli.mmwcy.cn/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    redir https://claude.liuli.arelay.com{uri} permanent
+}
+
+# 5. claude.liuli.arelay.com
+claude.liuli.arelay.com {
+    #tls /etc/letsencrypt/live/claude.liuli.mmwcy.cn/fullchain.pem /etc/letsencrypt/live/claude.liuli.mmwcy.cn/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy http://54.254.143.80:1341 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+
+# 6. storage.ucas.life
+storage.ucas.life {
+    #tls /etc/letsencrypt/live/storage.ucas.life/fullchain.pem /etc/letsencrypt/live/storage.ucas.life/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy http://54.254.143.80:8081 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+
+# 7. claude2.ai0.cn
+claude2.ai0.cn {
+    #tls /etc/letsencrypt/live/claude2.ai0.cn/fullchain.pem /etc/letsencrypt/live/claude2.ai0.cn/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy http://54.254.143.80:8300 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+
+# 8. demogpt.585dg.com
+demogpt.585dg.com {
+    #tls /etc/letsencrypt/live/demogpt.585dg.com/fullchain.pem /etc/letsencrypt/live/demogpt.585dg.com/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy https://chat.soruxgpt.com {
+        header_up Host chat.soruxgpt.com
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            #tls
+            #tls_server_name chat.soruxgpt.com
+            versions h1, h2
+        }
+        flush_interval -1
+    }
+}
+
+# 9. ailiu.585dg.com
+ailiu.585dg.com {
+    #tls /etc/letsencrypt/live/ailiu.585dg.com/fullchain.pem /etc/letsencrypt/live/ailiu.585dg.com/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy http://54.254.143.80:8300 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+
+# 10. claude35.liuligpt.space
+claude35.liuligpt.space {
+    #tls /etc/letsencrypt/live/claude35.liuligpt.space/fullchain.pem /etc/letsencrypt/live/claude35.liuligpt.space/privkey.pem
+
+    redir / /chat permanent
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy http://54.254.143.80:1341 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+
+# 11. claude35.liuligpt.com
+claude35.liuligpt.com {
+    #tls /etc/letsencrypt/live/claude35.liuligpt.space/fullchain.pem /etc/letsencrypt/live/claude35.liuligpt.space/privkey.pem
+
+    redir / /chat permanent
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy http://54.254.143.80:1341 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+
+# 12. liuli.mmwcy.cn
+liuli.mmwcy.cn {
+    #tls /etc/letsencrypt/live/liuli.mmwcy.cn/fullchain.pem /etc/letsencrypt/live/liuli.mmwcy.cn/privkey.pem
+
+    redir https://shop.liuli.arelay.com{uri} permanent
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+}
+
+# 13. shop.liuli.arelay.com
+shop.liuli.arelay.com {
+    #tls /etc/letsencrypt/live/shop.liuli.arelay.com/fullchain.pem /etc/letsencrypt/live/shop.liuli.arelay.com/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy http://54.254.143.80:9000 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+
+# 14. api.claude35.585dg.com
+api.claude35.585dg.com {
+    #tls /etc/letsencrypt/live/api.claude35.585dg.com/fullchain.pem /etc/letsencrypt/live/api.claude35.585dg.com/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy http://54.254.143.80:1145 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+
+# 15. store.585dg.com
+store.585dg.com {
+    #tls /etc/letsencrypt/live/store.585dg.com/fullchain.pem /etc/letsencrypt/live/store.585dg.com/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy http://54.254.143.80:9000 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+
+# 16. api.poe.585dg.com
+api.poe.585dg.com {
+    #tls /etc/letsencrypt/live/api.poe.585dg.com/fullchain.pem /etc/letsencrypt/live/api.poe.585dg.com/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy http://54.254.143.80:8000 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+
+# 17. shop.liuligpt.space
+shop.liuligpt.space {
+    #tls /etc/letsencrypt/live/shop.liuligpt.space/fullchain.pem /etc/letsencrypt/live/shop.liuligpt.space/privkey.pem
+
+    redir https://liuli.mmwcy.cn{uri} permanent
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+}
+
+# 18. store.liuligpt.space
+store.liuligpt.space {
+    #tls /etc/letsencrypt/live/store.liuligpt.space/fullchain.pem /etc/letsencrypt/live/store.liuligpt.space/privkey.pem
+
+    redir https://liuli.mmwcy.cn{uri} permanent
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+}
+
+# 19. shop.liuligpt.com
+shop.liuligpt.com {
+    #tls /etc/letsencrypt/live/shop.liuligpt.com/fullchain.pem /etc/letsencrypt/live/shop.liuligpt.com/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy http://54.254.143.80:9000 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-For {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+
+# 20. claude.liuligpt.com
+claude.liuligpt.com {
+    #tls /etc/letsencrypt/live/claude.liuligpt.com/fullchain.pem /etc/letsencrypt/live/claude.liuligpt.com/privkey.pem
+
+    @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy http://54.254.143.80:8181 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}

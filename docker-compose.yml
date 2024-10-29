@@ -1,0 +1,14 @@
+version: '3'
+services:
+  candy:
+    image: tangcuyu/candy:latest
+    container_name: candy-proxy
+    ports:
+      - "80:80"
+      - "443:443"
+    volumes:
+      - ./Candyfile:/etc/caddy/Caddyfile
+      - /etc/letsencrypt:/etc/letsencrypt:ro
+      - /var/www/html:/var/www/html
+      - /etc/nginx/dist:/etc/nginx/dist
+    restart: unless-stopped
