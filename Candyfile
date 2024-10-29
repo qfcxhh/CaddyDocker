@@ -420,7 +420,7 @@ api.claude35.585dg.com {
 # 15. store.585dg.com 商店需要同时基于http和https
 
 # HTTP配置
-http://api.585dg.com {
+http://store.585dg.com {
     reverse_proxy http://54.254.143.80:9000 {
         header_up Host {host}
         header_up Upgrade {header.Upgrade}
@@ -431,7 +431,7 @@ http://api.585dg.com {
         flush_interval -1
     }
 }
-https://api.585dg.com {
+https://store.585dg.com {
     reverse_proxy http://54.254.143.80:9000 {
         header_up Host {host}
         header_up Upgrade {header.Upgrade}
