@@ -9,6 +9,7 @@ services:
     volumes:
       - ./Candyfile:/etc/caddy/Caddyfile
       - /etc/letsencrypt:/etc/letsencrypt:ro
+      - ./caddy_data:/data  # 将 /data 目录映射到主机的 ./caddy_data 目录
       - /var/www/html:/var/www/html
       - /etc/nginx/dist:/etc/nginx/dist
     restart: unless-stopped
