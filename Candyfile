@@ -203,18 +203,24 @@ chat.585dg.com {
     }
 
     reverse_proxy liuli-chatgpt.soruxgpt.com {
-        header_up Host liuli-chatgpt.soruxgpt.com
+        # Pass the original Host header to the upstream server
+        header_up Host {host}
         header_up X-Real-IP {remote_host}
         header_up X-Forwarded-For {remote_host}
         header_up X-Forwarded-Proto {scheme}
         header_up Upgrade {header.Upgrade}
-        header_up Connection "upgrade"
+        header_up Connection {header.Connection}
+        
+        # Rewrite 'Location' headers in responses to use your domain
+        header_down Location (.*) {http.request.scheme}://{http.request.host}{1}
+        
         transport http {
             versions h1, h2
         }
         flush_interval -1
     }
 }
+
 
 
 # 9. ailiu.585dg.com
