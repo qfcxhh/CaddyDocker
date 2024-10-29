@@ -232,19 +232,28 @@ chat.585dg.com {
         file_server
     }
 
-    reverse_proxy https://liuli-chatgpt.soruxgpt.com {
-        header_up Host liuli-chatgpt.soruxgpt.com
-        header_up X-Real-IP {remote_host}
-        header_up X-Forwarded-For {remote_host}
-        header_up X-Forwarded-Proto {scheme}
-        header_up Upgrade {header.Upgrade}
-        header_up Connection {header.Connection}
-        
+    reverse_proxy {
+        to https://chat.soruxgpt.com
+        header_up Host chat.soruxgpt.com
         transport http {
-            tls_server_name liuli-chatgpt.soruxgpt.com
-            versions h1, h2
+            tls
+            tls_insecure_skip_verify
         }
     }
+
+    # reverse_proxy https://liuli-chatgpt.soruxgpt.com {
+    #     header_up Host liuli-chatgpt.soruxgpt.com
+    #     header_up X-Real-IP {remote_host}
+    #     header_up X-Forwarded-For {remote_host}
+    #     header_up X-Forwarded-Proto {scheme}
+    #     header_up Upgrade {header.Upgrade}
+    #     header_up Connection {header.Connection}
+        
+    #     transport http {
+    #         tls_server_name liuli-chatgpt.soruxgpt.com
+    #         versions h1, h2
+    #     }
+    # }
 }
 
 
