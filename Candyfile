@@ -1,8 +1,6 @@
 {
     # Global options
-    # auto_https disable_redirects
-        # 启用自动 HTTPS
-    auto_https on
+    auto_https disable_redirects
     # 可选: 配置邮箱用于 Let's Encrypt 通知
     email 213193509seu@gmail.com
 }
