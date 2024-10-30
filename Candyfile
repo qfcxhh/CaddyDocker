@@ -473,8 +473,12 @@ ai.liuli.585dg.com {
     reverse_proxy 54.254.143.80:8181
 }
 
-claude.liuli.585dg.com {
-        @acme_challenge {
+http://claude.liuli.585dg.com {
+    redir https://{host}{uri}
+}
+
+https://claude.liuli.585dg.com {
+    @acme_challenge {
         path /.well-known/acme-challenge/*
     }
     handle @acme_challenge {
