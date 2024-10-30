@@ -93,6 +93,15 @@ claude.liuli.mmwcy.cn {
     redir https://claude.liuli.arelay.com{uri} permanent
 }
 
+api.claude.585dg.com {
+    reverse_proxy 54.254.143.80:1145
+}
+
+poe.585dg.com {
+    reverse_proxy 54.254.143.80:1441
+}
+
+
 # 5. claude.liuli.arelay.com
 claude.liuli.arelay.com {
     #tls /etc/letsencrypt/live/claude.liuli.mmwcy.cn/fullchain.pem /etc/letsencrypt/live/claude.liuli.mmwcy.cn/privkey.pem
@@ -293,6 +302,9 @@ claude35.liuli.585dg.com {
     }
 }
 
+
+
+
 # 10. claude35.liuligpt.space
 claude35.liuligpt.space {
     #tls /etc/letsencrypt/live/claude35.liuligpt.space/fullchain.pem /etc/letsencrypt/live/claude35.liuligpt.space/privkey.pem
@@ -428,6 +440,41 @@ https://store.585dg.com {
         }
         flush_interval -1
     }
+}
+
+
+
+
+# HTTP配置
+http://shop.liuli.585dg.com {
+    reverse_proxy http://54.254.143.80:9000 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+https://shop.liuli.585dg.com {
+    reverse_proxy http://54.254.143.80:9000 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
+}
+
+ai.liuli.585dg.com {
+    reverse_proxy 54.254.143.80:8181
+}
+
+claude.liuli.585dg.com {
+    reverse_proxy 54.254.143.80:8300
 }
 
 
