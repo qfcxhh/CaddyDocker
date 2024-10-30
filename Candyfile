@@ -474,7 +474,23 @@ ai.liuli.585dg.com {
 }
 
 claude.liuli.585dg.com {
-    reverse_proxy 54.254.143.80:1341
+        @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
+
+    reverse_proxy http://54.254.143.80:1341 {
+        header_up Host {host}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+    }
 }
 
 
