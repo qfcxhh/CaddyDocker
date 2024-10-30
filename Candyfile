@@ -474,7 +474,7 @@ ai.liuli.585dg.com {
 }
 
 claude.liuli.585dg.com {
-    reverse_proxy 54.254.143.80:8300
+    reverse_proxy 54.254.143.80:1341
 }
 
 
