@@ -98,6 +98,13 @@ api.claude.585dg.com {
 }
 
 poe.585dg.com {
+      @acme_challenge {
+        path /.well-known/acme-challenge/*
+    }
+    handle @acme_challenge {
+        root * /var/www/html
+        file_server
+    }
     reverse_proxy 54.254.143.80:1441
 }
 
