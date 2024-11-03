@@ -261,7 +261,11 @@ ailiu.585dg.com {
 # 7nf28egs.svipcdn.cn.
 
 
-claud.585dg.com {
+http://claud.585dg.com  {
+    redir https://{host}{uri}
+}
+
+https://claud.585dg.com  {
     #tls /etc/letsencrypt/live/ailiu.585dg.com/fullchain.pem /etc/letsencrypt/live/ailiu.585dg.com/privkey.pem
 
     @acme_challenge {
