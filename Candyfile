@@ -336,13 +336,25 @@ claude35.liuli.585dg.com {
 #     }
 # }
 
-clauai.qqyunsd.com {
-    # 暂时注释掉 TLS 配置
-    # tls /etc/letsencrypt/live/ailiu.585dg.com/fullchain.pem /etc/letsencrypt/live/ailiu.585dg.com/privkey.pem
+# Caddy 配置
 
-    reverse_proxy http://54.254.143.80:8300
+
+
+# HTTP配置
+http://clauai.qqyunsd.com{
+   reverse_proxy http://54.254.143.80:8300 {
+        # Caddy 会自动监听 80/443 并转发到后端 8300
+        header_up Host {host}
+        header_up X-Real-IP {http.request.header.CF-Connecting-IP}
+    }
 }
-
+https://clauai.qqyunsd.com {
+   reverse_proxy http://54.254.143.80:8300 {
+        # Caddy 会自动监听 80/443 并转发到后端 8300
+        header_up Host {host}
+        header_up X-Real-IP {http.request.header.CF-Connecting-IP}
+    }
+}
 
 
 # 10. claude35.liuligpt.space
