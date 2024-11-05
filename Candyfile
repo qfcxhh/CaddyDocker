@@ -347,9 +347,17 @@ http://clauai.qqyunsd.com {
         header_up X-Forwarded-For {remote_host}
         header_up CF-Connecting-IP {http.request.header.CF-Connecting-IP}
         header_up CF-Ray {http.request.header.CF-Ray}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
         health_timeout 5s
     }
 }
+
+   
 
 https://clauai.qqyunsd.com {
     reverse_proxy http://54.254.143.80:8300 {
@@ -359,6 +367,12 @@ https://clauai.qqyunsd.com {
         header_up X-Forwarded-For {remote_host}
         header_up CF-Connecting-IP {http.request.header.CF-Connecting-IP}
         header_up CF-Ray {http.request.header.CF-Ray}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
         health_timeout 5s
     }
 }
