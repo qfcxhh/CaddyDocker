@@ -364,10 +364,6 @@ http://clauai.qqyunsd.com {
    
 
 https://clauai.qqyunsd.com {
-    tls {
-# 如果使用Cloudflare，建议添加
-dns cloudflare
-}
     reverse_proxy http://54.254.143.80:8300 {
         header_up Host {host}
         header_up X-Real-IP {remote_host}
