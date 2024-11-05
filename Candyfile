@@ -313,30 +313,35 @@ claude35.liuli.585dg.com {
 }
 
 
-# 9.2 ailiu.585dg.com
-clauai.qqyunsd.com  {
-    #tls /etc/letsencrypt/live/ailiu.585dg.com/fullchain.pem /etc/letsencrypt/live/ailiu.585dg.com/privkey.pem
+# # 9.2 ailiu.585dg.com
+# clauai.qqyunsd.com  {
+#     #tls /etc/letsencrypt/live/ailiu.585dg.com/fullchain.pem /etc/letsencrypt/live/ailiu.585dg.com/privkey.pem
 
-    @acme_challenge {
-        path /.well-known/acme-challenge/*
-    }
-    handle @acme_challenge {
-        root * /var/www/html
-        file_server
-    }
+#     @acme_challenge {
+#         path /.well-known/acme-challenge/*
+#     }
+#     handle @acme_challenge {
+#         root * /var/www/html
+#         file_server
+#     }
 
-    reverse_proxy http://54.254.143.80:8300 {
-        header_up Host {host}
-        header_up Upgrade {header.Upgrade}
-        header_up Connection "upgrade"
-        transport http {
-            versions h1
-        }
-        flush_interval -1
-    }
+#     reverse_proxy http://54.254.143.80:8300 {
+#         header_up Host {host}
+#         header_up Upgrade {header.Upgrade}
+#         header_up Connection "upgrade"
+#         transport http {
+#             versions h1
+#         }
+#         flush_interval -1
+#     }
+# }
+
+clauai.qqyunsd.com {
+    # 暂时注释掉 TLS 配置
+    # tls /etc/letsencrypt/live/ailiu.585dg.com/fullchain.pem /etc/letsencrypt/live/ailiu.585dg.com/privkey.pem
+
+    reverse_proxy http://54.254.143.80:8300
 }
-
-
 
 
 
