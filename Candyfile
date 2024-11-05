@@ -402,9 +402,9 @@ clauai.qqyunsd.com {
 #         flush_interval -1
 #         health_timeout 5s
 #     }
-# tls {
-#     dns cloudflare AEvH27f-KDkj09dITa9_U7OdLfu4LZs9TqwMfczX
-# }
+tls {
+    dns cloudflare AEvH27f-KDkj09dITa9_U7OdLfu4LZs9TqwMfczX
+}
 
 }
 
