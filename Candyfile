@@ -340,8 +340,28 @@ claude35.liuli.585dg.com {
 
 
 http://clauai.qqyunsd.com {
-    redir https://{host}{uri} permanent
+    reverse_proxy http://54.254.143.80:8300 {
+        header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Forwarded-For {remote_host}
+        header_up CF-Connecting-IP {http.request.header.CF-Connecting-IP}
+        header_up CF-Ray {http.request.header.CF-Ray}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+        health_timeout 5s
+    }
 }
+# http://clauai.qqyunsd.com {
+#     redir https://{host}{uri} permanent
+# }
+
+
+   
 
 https://clauai.qqyunsd.com {
     reverse_proxy http://54.254.143.80:8300 {
@@ -360,6 +380,8 @@ https://clauai.qqyunsd.com {
         health_timeout 5s
     }
 }
+
+
 
 # 10. claude35.liuligpt.space
 claude35.liuligpt.space {
