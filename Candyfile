@@ -420,6 +420,45 @@ https://shop.qqyunsd.com {
     }
 }
 
+
+
+
+
+http://poe.qqyunsd.com {
+    reverse_proxy http://54.254.143.80:1441 {
+      header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Forwarded-For {remote_host}
+        header_up CF-Connecting-IP {http.request.header.CF-Connecting-IP}
+        header_up CF-Ray {http.request.header.CF-Ray}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+        health_timeout 5s
+    }
+}
+
+https://poe.qqyunsd.com {
+    reverse_proxy http://54.254.143.80:1441 {
+      header_up Host {host}
+        header_up X-Real-IP {remote_host}
+        header_up X-Forwarded-Proto {scheme}
+        header_up X-Forwarded-For {remote_host}
+        header_up CF-Connecting-IP {http.request.header.CF-Connecting-IP}
+        header_up CF-Ray {http.request.header.CF-Ray}
+        header_up Upgrade {header.Upgrade}
+        header_up Connection "upgrade"
+        transport http {
+            versions h1
+        }
+        flush_interval -1
+        health_timeout 5s
+    }
+}
 # clauai.qqyunsd.com {
 #     # 添加日志便于调试
 #     # log {
