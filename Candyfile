@@ -385,6 +385,31 @@ https://clauai.qqyunsd.com {
 
 
 # HTTP配置
+http://chat.qqyunsd.com {
+ 
+    reverse_proxy {
+        to https://liuli-chatgpt.soruxgpt.com 
+        header_up Host liuli-chatgpt.soruxgpt.com
+        transport http {
+            tls
+            tls_insecure_skip_verify
+        }
+    }
+}
+https://chat.qqyunsd.com {
+
+    reverse_proxy {
+        to https://liuli-chatgpt.soruxgpt.com 
+        header_up Host liuli-chatgpt.soruxgpt.com
+        transport http {
+            tls
+            tls_insecure_skip_verify
+        }
+    }
+}
+
+
+# HTTP配置
 http://shop.qqyunsd.com {
     reverse_proxy http://54.254.143.80:9000 {
       header_up Host {host}
@@ -642,6 +667,12 @@ https://shop.liuli.585dg.com {
         flush_interval -1
     }
 }
+
+
+
+
+
+
 
 ai.liuli.585dg.com {
     reverse_proxy 54.254.143.80:8181
