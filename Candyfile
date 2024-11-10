@@ -1,4 +1,6 @@
 {
+    order replace after encode
+
     # Global options
     auto_https disable_redirects
     # 可选: 配置邮箱用于 Let's Encrypt 通知
@@ -219,7 +221,12 @@ chat.585dg.com {
         root * /var/www/html
         file_server
     }
-
+    replace "SoruxGPT 登录" "GPT 登录"
+    replace "SoruxGPT 账号" "GPT 账号"
+    replace "SoruxGPT 密码" "GPT 密码"
+    replace "Hello, SoruxGPT!" "Hello, GPT!"
+    replace "default-mail@soruxgpt.com" "default-mail@gpt.com"
+    replace "SoruxGPT.com User" "GPT.com User"
     reverse_proxy {
         to https://liuli-chatgpt.soruxgpt.com 
         header_up Host liuli-chatgpt.soruxgpt.com
@@ -386,7 +393,12 @@ https://clauai.qqyunsd.com {
 
 # HTTP配置
 http://chat.qqyunsd.com {
- 
+    replace "SoruxGPT 登录" "GPT 登录"
+    replace "SoruxGPT 账号" "GPT 账号"
+    replace "SoruxGPT 密码" "GPT 密码"
+    replace "Hello, SoruxGPT!" "Hello, GPT!"
+    replace "default-mail@soruxgpt.com" "default-mail@gpt.com"
+    replace "SoruxGPT.com User" "GPT.com User"
     reverse_proxy {
         to https://liuli-chatgpt.soruxgpt.com 
         header_up Host liuli-chatgpt.soruxgpt.com
@@ -410,7 +422,12 @@ http://chat.qqyunsd.com {
     # }
 }
 https://chat.qqyunsd.com {
-
+    replace "SoruxGPT 登录" "GPT 登录"
+    replace "SoruxGPT 账号" "GPT 账号"
+    replace "SoruxGPT 密码" "GPT 密码"
+    replace "Hello, SoruxGPT!" "Hello, GPT!"
+    replace "default-mail@soruxgpt.com" "default-mail@gpt.com"
+    replace "SoruxGPT.com User" "GPT.com User"
     reverse_proxy {
         to https://liuli-chatgpt.soruxgpt.com 
         header_up Host liuli-chatgpt.soruxgpt.com
