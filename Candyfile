@@ -395,13 +395,13 @@ http://chat.qqyunsd.com {
             tls_insecure_skip_verify
         }
     }
-      @html {
-        header Content-Type *text/html*
-    }
-    response @html {
-        header -Content-Length
-        replace "SoruxGPT 登录" "GPT 登录"
-    }
+    #   @html {
+    #     header Content-Type *text/html*
+    # }
+    # response @html {
+    #     header -Content-Length
+    #     replace "SoruxGPT 登录" "GPT 登录"
+    # }
 
     #   response_modifier {
     #     # 替换响应体中的文本
@@ -419,13 +419,13 @@ https://chat.qqyunsd.com {
             tls_insecure_skip_verify
         }
     }
-      @html {
-        header Content-Type *text/html*
-    }
-    response @html {
-        header -Content-Length
-        replace "SoruxGPT 登录" "GPT 登录"
-    }
+    #   @html {
+    #     header Content-Type *text/html*
+    # }
+    # response @html {
+    #     header -Content-Length
+    #     replace "SoruxGPT 登录" "GPT 登录"
+    # }
 
     #   response_modifier {
     #     # 替换响应体中的文本
