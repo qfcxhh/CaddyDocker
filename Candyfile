@@ -395,6 +395,12 @@ http://chat.qqyunsd.com {
             tls_insecure_skip_verify
         }
     }
+      response_modifier {
+        # 替换响应体中的文本
+        replace "Sorux" ""
+        replace "sorux" ""
+
+    }
 }
 https://chat.qqyunsd.com {
 
@@ -405,6 +411,12 @@ https://chat.qqyunsd.com {
             tls
             tls_insecure_skip_verify
         }
+    }
+      response_modifier {
+        # 替换响应体中的文本
+        replace "Sorux" ""
+        replace "sorux" ""
+
     }
 }
 
