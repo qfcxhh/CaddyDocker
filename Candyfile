@@ -212,8 +212,47 @@ claude2.ai0.cn {
 # 8.1 this is a newly created domain https://chat.585dg.com/
 
 
+# http://chat.585dg.com {
+#     # Caddy会自动申请和管理证书，不需要手动指定证书路径
+#     replace "SoruxGPT 登录" "GPT 登录"
+#     replace "SoruxGPT 账号" "GPT 账号"
+#     replace "SoruxGPT 密码" "GPT 密码"
+#     replace "Hello, SoruxGPT!" "Hello, GPT!"
+#     replace "default-mail@soruxgpt.com" "default-mail@gpt.com"
+#     replace "SoruxGPT.com User" "GPT.com User"
+#     reverse_proxy {
+#         to https://liuli-chatgpt.soruxgpt.com 
+#         header_up Host liuli-chatgpt.soruxgpt.com
+#         transport http {
+#             tls
+#             tls_insecure_skip_verify
+#         }
+#     }
+
+# }
+
+# https://chat.585dg.com {
+#     # Caddy会自动申请和管理证书，不需要手动指定证书路径
+#     replace "SoruxGPT 登录" "GPT 登录"
+#     replace "SoruxGPT 账号" "GPT 账号"
+#     replace "SoruxGPT 密码" "GPT 密码"
+#     replace "Hello, SoruxGPT!" "Hello, GPT!"
+#     replace "default-mail@soruxgpt.com" "default-mail@gpt.com"
+#     replace "SoruxGPT.com User" "GPT.com User"
+#     reverse_proxy {
+#         to https://liuli-chatgpt.soruxgpt.com 
+#         header_up Host liuli-chatgpt.soruxgpt.com
+#         transport http {
+#             tls
+#             tls_insecure_skip_verify
+#         }
+#     }
+
+# }
+
+
+# HTTP配置
 http://chat.585dg.com {
-    # Caddy会自动申请和管理证书，不需要手动指定证书路径
     replace "SoruxGPT 登录" "GPT 登录"
     replace "SoruxGPT 账号" "GPT 账号"
     replace "SoruxGPT 密码" "GPT 密码"
@@ -228,11 +267,8 @@ http://chat.585dg.com {
             tls_insecure_skip_verify
         }
     }
-
 }
-
 https://chat.585dg.com {
-    # Caddy会自动申请和管理证书，不需要手动指定证书路径
     replace "SoruxGPT 登录" "GPT 登录"
     replace "SoruxGPT 账号" "GPT 账号"
     replace "SoruxGPT 密码" "GPT 密码"
@@ -247,7 +283,6 @@ https://chat.585dg.com {
             tls_insecure_skip_verify
         }
     }
-
 }
 
 
@@ -418,19 +453,6 @@ http://chat.qqyunsd.com {
             tls_insecure_skip_verify
         }
     }
-    #   @html {
-    #     header Content-Type *text/html*
-    # }
-    # response @html {
-    #     header -Content-Length
-    #     replace "SoruxGPT 登录" "GPT 登录"
-    # }
-
-    #   response_modifier {
-    #     # 替换响应体中的文本
-    #     replace "SoruxGPT 登录" "GPT 登录"
-
-    # }
 }
 https://chat.qqyunsd.com {
     replace "SoruxGPT 登录" "GPT 登录"
@@ -447,19 +469,6 @@ https://chat.qqyunsd.com {
             tls_insecure_skip_verify
         }
     }
-    #   @html {
-    #     header Content-Type *text/html*
-    # }
-    # response @html {
-    #     header -Content-Length
-    #     replace "SoruxGPT 登录" "GPT 登录"
-    # }
-
-    #   response_modifier {
-    #     # 替换响应体中的文本
-    #     replace "SoruxGPT 登录" "GPT 登录"
-
-    # }
 }
 
 
