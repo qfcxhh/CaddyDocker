@@ -395,11 +395,11 @@ http://chat.qqyunsd.com {
             tls_insecure_skip_verify
         }
     }
-      response_modifier {
-        # 替换响应体中的文本
-        replace "SoruxGPT 登录" "GPT 登录"
+    #   response_modifier {
+    #     # 替换响应体中的文本
+    #     replace "SoruxGPT 登录" "GPT 登录"
 
-    }
+    # }
 }
 https://chat.qqyunsd.com {
 
