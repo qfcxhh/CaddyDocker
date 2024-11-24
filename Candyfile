@@ -625,7 +625,7 @@ chatai.qqyunsd.com {
     #     header_up Host {http.reverse_proxy.upstream.hostport}
     #     header_up Accept-Encoding identity  # 禁用压缩以确保替换能正常工作
     # }
-     reverse_proxy {
+         reverse_proxy {
      to https://liuli-chatgpt.soruxgpt.com
       header_up Host liuli-chatgpt.soruxgpt.com
  }
