@@ -7,7 +7,7 @@ services:
       - "80:80"
       - "443:443"
     volumes:
-      - ./Candyfile:/etc/caddy/Caddyfile
+      - ./Caddyfile:/etc/caddy/Caddyfile
       - /etc/letsencrypt:/etc/letsencrypt:ro
       - ./caddy_data:/data  # 将 /data 目录映射到主机的 ./caddy_data 目录
       - /var/www/html:/var/www/html
