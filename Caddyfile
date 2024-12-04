@@ -1030,17 +1030,6 @@ health_timeout 5s
 
 
 
-reverse_proxy http://54.254.143.80:1341 {
-header_up Host {host}
-header_up Upgrade {header.Upgrade}
-header_up Connection "upgrade"
-transport http {
-versions h1
-}
-flush_interval -1
-}
-}
-
 
 # store.585dg.com {
 #     #tls /etc/letsencrypt/live/store.585dg.com/fullchain.pem /etc/letsencrypt/live/store.585dg.com/privkey.pem
