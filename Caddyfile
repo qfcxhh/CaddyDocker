@@ -136,27 +136,30 @@ health_timeout 5s
  }
 
 # 5. claude.liuli.arelay.com
-claude.liuli.arelay.com {
-#tls /etc/letsencrypt/live/claude.liuli.mmwcy.cn/fullchain.pem /etc/letsencrypt/live/claude.liuli.mmwcy.cn/privkey.pem
+# claude.liuli.arelay.com {
+# #tls /etc/letsencrypt/live/claude.liuli.mmwcy.cn/fullchain.pem /etc/letsencrypt/live/claude.liuli.mmwcy.cn/privkey.pem
 
-@acme_challenge {
-path /.well-known/acme-challenge/*
-}
-handle @acme_challenge {
-root * /var/www/html
-file_server
-}
+# @acme_challenge {
+# path /.well-known/acme-challenge/*
+# }
+# handle @acme_challenge {
+# root * /var/www/html
+# file_server
+# }
 
-reverse_proxy http://54.254.143.80:1341 {
-header_up Host {host}
-header_up Upgrade {header.Upgrade}
-header_up Connection "upgrade"
-transport http {
-versions h1
-}
-flush_interval -1
-}
-}
+# reverse_proxy http://54.254.143.80:1341 {
+# header_up Host {host}
+# header_up Upgrade {header.Upgrade}
+# header_up Connection "upgrade"
+# transport http {
+# versions h1
+# }
+# flush_interval -1
+# }
+# }
+
+
+
 
 # 6. storage.ucas.life
 storage.ucas.life {
@@ -986,18 +989,46 @@ ai.liuli.585dg.com {
 reverse_proxy 54.254.143.80:8181
 }
 
-http://claude.liuli.585dg.com {
+# http://claude.liuli.585dg.com {
+# redir https://{host}{uri}
+# }
+
+# https://claude.liuli.585dg.com {
+# @acme_challenge {
+# path /.well-known/acme-challenge/*
+# }
+# handle @acme_challenge {
+# root * /var/www/html
+# file_server
+# }
+
+
+http://claude.liuli.585dg.com  {
 redir https://{host}{uri}
 }
 
-https://claude.liuli.585dg.com {
-@acme_challenge {
-path /.well-known/acme-challenge/*
+
+
+ https://claude.liuli.585dg.com  {
+reverse_proxy http://54.254.143.80:1341 {
+header_up Host {host}
+header_up X-Real-IP {remote_host}
+header_up X-Forwarded-Proto {scheme}
+header_up X-Forwarded-For {remote_host}
+header_up CF-Connecting-IP {http.request.header.CF-Connecting-IP}
+header_up CF-Ray {http.request.header.CF-Ray}
+header_up Upgrade {header.Upgrade}
+header_up Connection "upgrade"
+transport http {
+versions h1
 }
-handle @acme_challenge {
-root * /var/www/html
-file_server
+flush_interval -1
+health_timeout 5s
 }
+ }
+
+
+
 
 reverse_proxy http://54.254.143.80:1341 {
 header_up Host {host}
