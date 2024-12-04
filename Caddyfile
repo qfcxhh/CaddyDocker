@@ -95,19 +95,64 @@ file_server
 redir https://claude.liuli.arelay.com{uri} permanent
 }
 
-api.claude.585dg.com {
-reverse_proxy 54.254.143.80:1145
+http://api.claude.585dg.com {
+redir https://{host}{uri} permanent
 }
 
-poe.585dg.com {
-@acme_challenge {
-path /.well-known/acme-challenge/*
+api.claude.585dg.com{
+reverse_proxy http://54.254.143.80:1145 {
+header_up Host {host}
+header_up X-Real-IP {remote_host}
+header_up X-Forwarded-Proto {scheme}
+header_up X-Forwarded-For {remote_host}
+header_up CF-Connecting-IP {http.request.header.CF-Connecting-IP}
+header_up CF-Ray {http.request.header.CF-Ray}
+header_up Upgrade {header.Upgrade}
+header_up Connection "upgrade"
+transport http {
+versions h1
 }
-handle @acme_challenge {
-root * /var/www/html
-file_server
+flush_interval -1
+health_timeout 5s
 }
-reverse_proxy 54.254.143.80:1441
+}
+
+
+
+
+
+# poe.585dg.com {
+# @acme_challenge {
+# path /.well-known/acme-challenge/*
+# }
+# handle @acme_challenge {
+# root * /var/www/html
+# file_server
+# }
+# reverse_proxy 54.254.143.80:1441
+# }
+
+
+http://poe.585dg.com {
+redir https://{host}{uri} permanent
+}
+
+poe.585dg.com{
+reverse_proxy http://54.254.143.80:1441 {
+header_up Host {host}
+header_up X-Real-IP {remote_host}
+header_up X-Forwarded-Proto {scheme}
+header_up X-Forwarded-For {remote_host}
+header_up CF-Connecting-IP {http.request.header.CF-Connecting-IP}
+header_up CF-Ray {http.request.header.CF-Ray}
+header_up Upgrade {header.Upgrade}
+header_up Connection "upgrade"
+transport http {
+versions h1
+}
+flush_interval -1
+health_timeout 5s
+}
 }
 
 
