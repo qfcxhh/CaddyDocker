@@ -338,12 +338,12 @@ flush_interval -1
 
 
 
-http://clauO1.585dg.com {
+http://clauO1.585dg.com  {
     redir https://{host}{uri}
 }
 
-https://clauO1.585dg.com {
-handle /api/* {
+https://clauO1.585dg.com  {
+   handle /api/* {
         reverse_proxy http://54.254.143.80:8600
         }
 
@@ -357,7 +357,7 @@ handle /api/* {
        reverse_proxy http://54.254.143.80:8600
    }
 
-reverse_proxy http://54.254.143.80:8500
+    reverse_proxy http://54.254.143.80:8500
 }
 
 http://chat.585dg.com {
